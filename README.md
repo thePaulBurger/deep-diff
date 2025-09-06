@@ -19,3 +19,21 @@ Add this to your `Cargo.toml`:
 deep-diff = "0.1"
 serde_json = "1.0"
 ```
+
+## Example
+
+```rust
+use deep_diff::{deep_diff, Difference};
+use serde_json::json;
+
+fn main() {
+    let a = json!({"name": "Alice", "age": 30});
+    let b = json!({"name": "Bob", "age": 30});
+
+    let diffs = deep_diff(&a, &b);
+
+    for diff in diffs {
+        println!("Changed at path '{}': from {:?} to {:?}", diff.path, diff.before, diff.after);
+    }
+}
+```
